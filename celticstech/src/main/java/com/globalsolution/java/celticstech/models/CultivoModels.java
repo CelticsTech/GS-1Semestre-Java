@@ -1,0 +1,39 @@
+package com.globalsolution.java.celticstech.models;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "TB_GS_CULTIVO")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class CultivoModels {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE )
+    private Long idCultivo;
+
+    @Column(nullable = false)
+    private String nomeCultivo;
+
+    @Column(nullable = false)
+    private String categoriaCultivo;
+
+    @Column(nullable = false)
+    private String porteCultivo;
+
+    @Column(nullable = false)
+    private String tempoColheita;
+
+    @Column(nullable = false)
+    private String vidaUtil;
+
+    @Column(nullable = false)
+    private String intermitencia;
+
+}
