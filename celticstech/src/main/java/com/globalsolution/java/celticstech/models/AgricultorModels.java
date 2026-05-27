@@ -1,5 +1,6 @@
 package com.globalsolution.java.celticstech.models;
 
+import com.globalsolution.java.celticstech.enums.SexoAgricultorEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,8 +26,9 @@ public class AgricultorModels {
 
     private Integer idade;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String sexo;
+    private SexoAgricultorEnum sexo;
 
     @Column(nullable = false)
     private Integer qtdeDependentes;
