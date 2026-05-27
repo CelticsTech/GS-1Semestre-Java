@@ -1,10 +1,13 @@
 package com.globalsolution.java.celticstech.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "TB_GS_CULTIVO")
@@ -36,4 +39,11 @@ public class CultivoModels {
     @Column(nullable = false)
     private String intermitencia;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "cultivos")
+    private List<AgricultorModels> agricultores;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "cultivo")
+    private List<RecomendacaoModels> recomendacoes;
 }

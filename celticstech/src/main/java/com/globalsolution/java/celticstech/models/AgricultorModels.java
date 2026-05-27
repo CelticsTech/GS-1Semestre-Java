@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "TB_GS_AGRICULTOR")
@@ -28,5 +30,16 @@ public class AgricultorModels {
 
     @Column(nullable = false)
     private Integer qtdeDependentes;
+
+    @ManyToMany(mappedBy = "agricultores")
+    private List<AssociacaoModels> associacoes;
+
+    @ManyToMany
+    @JoinTable(
+            name = "TB_GS_AGR_CULTIVO",
+            joinColumns = @JoinColumn(name = "id_agricultor"),
+            inverseJoinColumns = @JoinColumn(name = "id_cultivo")
+    )
+    private List<CultivoModels> cultivos;
 
 }

@@ -28,4 +28,12 @@ public class RecomendacaoModels {
     @Column(nullable = false)
     private Integer tipoRecomendacao;
 
+    @ManyToOne
+    @JoinColumn(name = "id_associacao", nullable = false)
+    private AssociacaoModels associacao;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cultivo", nullable = false)
+    private CultivoModels cultivo;
+
 }
