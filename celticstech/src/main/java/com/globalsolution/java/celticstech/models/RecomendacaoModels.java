@@ -18,8 +18,14 @@ public class RecomendacaoModels {
 
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long idRecomendacao;
+
+    @Column(nullable = false)
     private LocalDate dataRecAsc;
+
+    @Column(nullable = false)
     private String orientacao;
+
+    @Column(nullable = false)
     private Integer tipoRecomendacao;
 
 }
