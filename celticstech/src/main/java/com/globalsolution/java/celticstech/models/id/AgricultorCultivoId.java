@@ -14,7 +14,6 @@ import java.io.Serializable;
 public class AgricultorCultivoId implements Serializable {
 
     private Long idAgricultor;
-
     private Long idCultivo;
 
 }

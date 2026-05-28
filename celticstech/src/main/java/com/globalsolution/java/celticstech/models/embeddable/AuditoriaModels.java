@@ -12,22 +12,16 @@ import java.time.LocalDateTime;
 public class AuditoriaModels {
 
     private LocalDateTime dataCriacao;
-
     private LocalDateTime dataAtualizacao;
 
     @PrePersist
     public void prePersist() {
-
         this.dataCriacao = LocalDateTime.now();
         this.dataAtualizacao = LocalDateTime.now();
-
     }
 
     @PreUpdate
     public void preUpdate() {
-
         this.dataAtualizacao = LocalDateTime.now();
-
     }
-
 }

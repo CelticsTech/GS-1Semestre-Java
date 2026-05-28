@@ -13,9 +13,7 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<String> handleNotFound(
-            ResourceNotFoundException ex
-    ) {
+    public ResponseEntity<String> handleNotFound(ResourceNotFoundException ex) {
 
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
@@ -24,9 +22,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<String> handleBusiness(
-            BusinessException ex
-    ) {
+    public ResponseEntity<String> handleBusiness(BusinessException ex) {
 
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
@@ -35,8 +31,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidation(
-            MethodArgumentNotValidException ex
+    public ResponseEntity<Map<String, String>> handleValidation(MethodArgumentNotValidException ex
     ) {
 
         Map<String, String> errors = new HashMap<>();
@@ -44,16 +39,12 @@ public class GlobalExceptionHandler {
         ex.getBindingResult()
                 .getFieldErrors()
                 .forEach(error ->
-                        errors.put(
-                                error.getField(),
-                                error.getDefaultMessage()
+                        errors.put(error.getField(), error.getDefaultMessage()
                         )
                 );
 
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(errors);
-
     }
-
 }
