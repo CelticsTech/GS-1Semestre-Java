@@ -1,6 +1,7 @@
 package com.globalsolution.java.celticstech.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.globalsolution.java.celticstech.enums.PorteCultivoEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,8 +28,9 @@ public class CultivoModels {
     @Column(nullable = false)
     private String categoriaCultivo;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String porteCultivo;
+    private PorteCultivoEnum porteCultivo;
 
     @Column(nullable = false)
     private String tempoColheita;
