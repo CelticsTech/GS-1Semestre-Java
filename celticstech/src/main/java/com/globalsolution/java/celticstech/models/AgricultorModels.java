@@ -40,12 +40,6 @@ public class AgricultorModels {
     @ManyToMany(mappedBy = "agricultores")
     private List<AssociacaoModels> associacoes;
 
-    @ManyToMany
-    @JoinTable(
-            name = "TB_GS_AGR_CULTIVO",
-            joinColumns = @JoinColumn(name = "id_agricultor"),
-            inverseJoinColumns = @JoinColumn(name = "id_cultivo")
-    )
     private List<CultivoModels> cultivos;
 
     @Embedded
