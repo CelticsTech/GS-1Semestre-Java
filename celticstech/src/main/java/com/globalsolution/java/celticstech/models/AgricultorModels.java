@@ -40,7 +40,9 @@ public class AgricultorModels {
     @ManyToMany(mappedBy = "agricultores")
     private List<AssociacaoModels> associacoes;
 
-    private List<CultivoModels> cultivos;
+    @JsonIgnore
+    @OneToMany(mappedBy = "agricultor")
+    private List<AgricultorCultivoModels> agricultorCultivos;
 
     @Embedded
     private AuditoriaModels auditoria;

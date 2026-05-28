@@ -43,8 +43,8 @@ public class CultivoModels {
     private String intermitencia;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "cultivos")
-    private List<AgricultorModels> agricultores;
+    @OneToMany(mappedBy = "cultivo")
+    private List<AgricultorCultivoModels> agricultorCultivos;
 
     @Embedded
     private AuditoriaModels auditoria;
