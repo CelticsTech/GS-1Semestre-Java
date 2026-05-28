@@ -23,5 +23,4 @@ public record AgricultorResponseDTO(
                 .qtdeDependentes(agricultor.getQtdeDependentes())
                 .build();
     }
-
 }

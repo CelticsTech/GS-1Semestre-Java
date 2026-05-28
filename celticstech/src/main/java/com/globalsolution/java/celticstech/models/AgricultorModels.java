@@ -1,5 +1,6 @@
 package com.globalsolution.java.celticstech.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.globalsolution.java.celticstech.enums.SexoAgricultorEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.List;
 public class AgricultorModels {
 
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id_agricultor")
     private Long idAgricultor;
 
     @Column(nullable = false)
@@ -33,6 +35,7 @@ public class AgricultorModels {
     @Column(nullable = false)
     private Integer qtdeDependentes;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "agricultores")
     private List<AssociacaoModels> associacoes;
 
