@@ -2,6 +2,7 @@ package com.globalsolution.java.celticstech.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.globalsolution.java.celticstech.enums.UfRegiaoEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +26,7 @@ public class RegiaoModels {
     private String nomeRegiao;
 
     @Column(nullable = false)
-    private String ufRegiao;
+    private UfRegiaoEnum ufRegiao;
 
     @JsonIgnore
     @OneToMany(mappedBy = "regiao")
