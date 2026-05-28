@@ -2,6 +2,7 @@ package com.globalsolution.java.celticstech.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.globalsolution.java.celticstech.enums.SexoAgricultorEnum;
+import com.globalsolution.java.celticstech.models.embeddable.AuditoriaModels;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,5 +47,8 @@ public class AgricultorModels {
             inverseJoinColumns = @JoinColumn(name = "id_cultivo")
     )
     private List<CultivoModels> cultivos;
+
+    @Embedded
+    private AuditoriaModels auditoria;
 
 }

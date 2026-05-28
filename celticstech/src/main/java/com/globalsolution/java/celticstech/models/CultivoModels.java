@@ -2,6 +2,7 @@ package com.globalsolution.java.celticstech.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.globalsolution.java.celticstech.enums.PorteCultivoEnum;
+import com.globalsolution.java.celticstech.models.embeddable.AuditoriaModels;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,4 +49,7 @@ public class CultivoModels {
     @JsonIgnore
     @OneToMany(mappedBy = "cultivo")
     private List<RecomendacaoModels> recomendacoes;
+
+    @Embedded
+    private AuditoriaModels auditoria;
 }

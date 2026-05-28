@@ -1,6 +1,7 @@
 package com.globalsolution.java.celticstech.models;
 
 import com.globalsolution.java.celticstech.enums.TipoRecomendacaoEnum;
+import com.globalsolution.java.celticstech.models.embeddable.AuditoriaModels;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,5 +38,8 @@ public class RecomendacaoModels {
     @ManyToOne
     @JoinColumn(name = "id_cultivo", nullable = false)
     private CultivoModels cultivo;
+
+    @Embedded
+    private AuditoriaModels auditoria;
 
 }
