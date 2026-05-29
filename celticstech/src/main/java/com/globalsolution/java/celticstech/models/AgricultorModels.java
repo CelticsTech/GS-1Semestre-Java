@@ -36,9 +36,8 @@ public class AgricultorModels {
     @Column(nullable = false)
     private Integer qtdeDependentes;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "agricultores")
-    private List<AssociacaoModels> associacoes;
+    @OneToMany(mappedBy = "agricultor")
+    private List<AssociacaoAgricultorModels> associacaoAgricultores;
 
     @JsonIgnore
     @OneToMany(mappedBy = "agricultor")

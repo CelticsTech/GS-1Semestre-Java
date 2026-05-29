@@ -40,13 +40,8 @@ public class AssociacaoModels {
     @JoinColumn(name = "id_regiao", nullable = false)
     private RegiaoModels regiao;
 
-    @ManyToMany
-    @JoinTable(
-            name = "TB_GS_ASC_AGR",
-            joinColumns = @JoinColumn(name = "id_associacao"),
-            inverseJoinColumns = @JoinColumn(name = "id_agricultor")
-    )
-    private List<AgricultorModels> agricultores;
+    @OneToMany(mappedBy = "associacao")
+    private List<AssociacaoAgricultorModels> associacaoAgricultores;
 
     @ManyToMany
     @JoinTable(
