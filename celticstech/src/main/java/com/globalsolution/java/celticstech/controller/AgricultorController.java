@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/agricultor")
+@RequestMapping("/agricultores")
 public class AgricultorController {
 
     private AgricultorService agricultorService;
@@ -60,7 +60,7 @@ public class AgricultorController {
     //-------------------------------------------------------------------------------------------------------------------
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/{idAgricultor}")
     public ResponseEntity<AgricultorResponseDTO> atualizarAgricultor(@PathVariable Long id,
                                                                      @Valid @RequestBody AgricultorRequestDTO agricultorRequest)
     {

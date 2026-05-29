@@ -32,7 +32,7 @@ public class AgricultorService {
 
     public AgricultorModels listarAgricultorPorId(Long id){
         return agricultorRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Agricultor não encontrado"));
+               .orElseThrow(() -> new ResourceNotFoundException("Agricultor não encontrado"));
     }
 
     //-------------------------------------------------------------------------------------------------------------------
