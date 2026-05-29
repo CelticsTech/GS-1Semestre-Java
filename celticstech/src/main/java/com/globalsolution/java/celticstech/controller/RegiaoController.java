@@ -21,6 +21,8 @@ public class RegiaoController {
         this.regiaoService = regiaoService;
     }
 
+    //-------------------------------------------------------------------------------------------------------------------
+
     @Operation(summary = "Criar Região")
     @PostMapping()
     public ResponseEntity<RegiaoResponseDTO> criarRegiao(@Valid @RequestBody RegiaoRequestDTO regiaoRequest){
@@ -28,6 +30,8 @@ public class RegiaoController {
                 .status(HttpStatus.CREATED)
                 .body(regiaoService.criarRegiao(regiaoRequest));
     }
+
+    //-------------------------------------------------------------------------------------------------------------------
 
     @Operation(summary = "Listar regiao pelo Id")
     @GetMapping("/{id}")
@@ -37,6 +41,8 @@ public class RegiaoController {
                 .body(regiaoService.listarPorId(id));
     }
 
+    //-------------------------------------------------------------------------------------------------------------------
+
     @Operation(summary = "Listar todas as regiões")
     @GetMapping()
     public ResponseEntity<Page<RegiaoResponseDTO>> listarTodos(Pageable pageable){
@@ -44,6 +50,8 @@ public class RegiaoController {
                 .status(HttpStatus.OK)
                 .body(regiaoService.listarTodos(pageable));
     }
+
+    //-------------------------------------------------------------------------------------------------------------------
 
     @Operation(summary = "Deletar Regiao")
     @DeleteMapping("/{id}")
@@ -53,6 +61,8 @@ public class RegiaoController {
                 .status(HttpStatus.NO_CONTENT)
                 .build();
     }
+
+    //-------------------------------------------------------------------------------------------------------------------
 
     @Operation(summary = "Atualizar região")
     @PutMapping("/{id}")
