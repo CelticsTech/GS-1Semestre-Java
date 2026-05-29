@@ -39,6 +39,8 @@ public class AgricultorCultivoService {
         this.cultivoService = cultivoService;
     }
 
+    //-------------------------------------------------------------------------------------------------------------------
+
     public Page<AgricultorCultivoResponseDTO> listarCultivosDoAgricultor(
             Long idAgricultor,
             Pageable pageable
@@ -49,6 +51,8 @@ public class AgricultorCultivoService {
                 .findByAgricultorIdAgricultor(idAgricultor, pageable)
                 .map(AgricultorCultivoResponseDTO::fromEntity);
     }
+
+    //-------------------------------------------------------------------------------------------------------------------
 
     public AgricultorCultivoResponseDTO vincularCultivo(Long idAgricultor, Long idCultivo){
 
@@ -71,6 +75,8 @@ public class AgricultorCultivoService {
         return AgricultorCultivoResponseDTO.fromEntity(
                 agricultorCultivoRepository.save(vinculo));
     };
+
+    //-------------------------------------------------------------------------------------------------------------------
 
     public void deletarVinculo(Long idCultivo, Long idAgricultor){
         AgricultorCultivoId id = new AgricultorCultivoId(idCultivo, idAgricultor);

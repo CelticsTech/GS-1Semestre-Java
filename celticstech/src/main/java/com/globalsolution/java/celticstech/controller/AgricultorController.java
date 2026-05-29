@@ -60,7 +60,7 @@ public class AgricultorController {
     //-------------------------------------------------------------------------------------------------------------------
 
 
-    @PutMapping("/{idAgricultor}")
+    @PutMapping("/{id}")
     public ResponseEntity<AgricultorResponseDTO> atualizarAgricultor(@PathVariable Long id,
                                                                      @Valid @RequestBody AgricultorRequestDTO agricultorRequest)
     {

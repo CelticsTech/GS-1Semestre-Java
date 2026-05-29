@@ -20,6 +20,9 @@ public class AgricultorCultivoController {
         this.agricultorCultivoService = agricultorCultivoService;
     }
 
+    //-------------------------------------------------------------------------------------------------------------------
+
+
     @PostMapping("/{idCultivo}")
     public ResponseEntity<AgricultorCultivoResponseDTO> vincularCultivo(
             @PathVariable Long idAgricultor,
@@ -29,6 +32,9 @@ public class AgricultorCultivoController {
                 .body(agricultorCultivoService.vincularCultivo(idAgricultor, idCultivo));
     }
 
+    //-------------------------------------------------------------------------------------------------------------------
+
+
     @DeleteMapping("/{idCultivo}")
     public ResponseEntity<Void> deletarVinculo(
             @PathVariable Long idAgricultor,
@@ -37,6 +43,9 @@ public class AgricultorCultivoController {
         agricultorCultivoService.deletarVinculo(idAgricultor, idCultivo);
         return ResponseEntity.noContent().build();
     }
+
+    //-------------------------------------------------------------------------------------------------------------------
+
 
     @GetMapping
     public ResponseEntity<Page<AgricultorCultivoResponseDTO>> listarCultivosDoAgricultor(
