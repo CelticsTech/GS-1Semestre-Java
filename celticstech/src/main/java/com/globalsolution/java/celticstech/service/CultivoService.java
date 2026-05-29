@@ -6,6 +6,8 @@ import com.globalsolution.java.celticstech.dto.response.CultivoResponseDTO;
 import com.globalsolution.java.celticstech.exceptions.ResourceNotFoundException;
 import com.globalsolution.java.celticstech.models.CultivoModels;
 import com.globalsolution.java.celticstech.repository.CultivoRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,13 @@ public class CultivoService {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @CacheEvict(
+            value = {
+                    "cultivos",
+                    "cultivosById"
+            },
+            allEntries = true
+    )
     public CultivoResponseDTO criarCultivo(CultivoRequestDTO cultivoRequest){
         CultivoModels cultivo = cultivoRepository.save(cultivoRequest.toEntity());
 
@@ -36,6 +45,7 @@ public class CultivoService {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @Cacheable(value = "cultivosById", key = "#id")
     public CultivoResponseDTO listarPorId(Long id){
         CultivoModels cultivo = listarCultivoPorId(id);
         return CultivoResponseDTO.fromEntity(cultivo);
@@ -43,6 +53,13 @@ public class CultivoService {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @CacheEvict(
+            value = {
+                    "cultivos",
+                    "cultivosById"
+            },
+            allEntries = true
+    )
     public void deletarCultivo(Long id){
         CultivoModels cultivo = listarCultivoPorId(id);
         cultivoRepository.delete(cultivo);
@@ -50,6 +67,13 @@ public class CultivoService {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @CacheEvict(
+            value = {
+                    "cultivos",
+                    "cultivosById"
+            },
+            allEntries = true
+    )
     public CultivoResponseDTO atualizarCultivo(Long id, CultivoRequestDTO cultivoRequest){
         CultivoModels cultivo = listarCultivoPorId(id);
 
@@ -67,6 +91,10 @@ public class CultivoService {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @Cacheable(
+            value = "cultivos",
+            key = "#pageable.pageNumber + '-' + #pageable.pageSize"
+    )
    public Page<CultivoResponseDTO> listarTodosCultivos(Pageable pageable){
         return cultivoRepository.findAll(pageable)
                 .map(CultivoResponseDTO::fromEntity);
