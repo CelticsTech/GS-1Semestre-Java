@@ -3,6 +3,7 @@ package com.globalsolution.java.celticstech.controller;
 import com.globalsolution.java.celticstech.dto.request.AgricultorRequestDTO;
 import com.globalsolution.java.celticstech.dto.response.AgricultorResponseDTO;
 import com.globalsolution.java.celticstech.service.AgricultorService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,7 @@ public class AgricultorController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @Operation(summary = "Criar agricultor")
     @PostMapping()
     public ResponseEntity<AgricultorResponseDTO> criarAgricultor(@Valid @RequestBody AgricultorRequestDTO agricultorRequest){
         return ResponseEntity
@@ -31,6 +33,7 @@ public class AgricultorController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @Operation(summary = "Lista todos os agricultores")
     @GetMapping()
     public ResponseEntity<Page<AgricultorResponseDTO>> listarTodosAgricultores(Pageable pageable){
         return ResponseEntity
@@ -40,6 +43,7 @@ public class AgricultorController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @Operation(summary = "Lista os agricultores pelo id")
     @GetMapping("/{id}")
     public ResponseEntity<AgricultorResponseDTO> listarAgricultorPorId(@PathVariable Long id){
         return ResponseEntity
@@ -49,6 +53,7 @@ public class AgricultorController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @Operation(summary = "Deleta o agricultor")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarAgricultor(@PathVariable Long id){
         agricultorService.removerAgricultor(id);
@@ -59,7 +64,7 @@ public class AgricultorController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
-
+    @Operation(summary = "Atualiza o agricultor")
     @PutMapping("/{id}")
     public ResponseEntity<AgricultorResponseDTO> atualizarAgricultor(@PathVariable Long id,
                                                                      @Valid @RequestBody AgricultorRequestDTO agricultorRequest)

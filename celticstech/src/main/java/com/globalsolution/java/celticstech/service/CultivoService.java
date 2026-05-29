@@ -68,7 +68,7 @@ public class CultivoService {
     //-------------------------------------------------------------------------------------------------------------------
 
    public Page<CultivoResponseDTO> listarTodosCultivos(Pageable pageable){
-        cultivoRepository.findAll(pageable)
+        return cultivoRepository.findAll(pageable)
                 .map(CultivoResponseDTO::fromEntity);
    }
 }

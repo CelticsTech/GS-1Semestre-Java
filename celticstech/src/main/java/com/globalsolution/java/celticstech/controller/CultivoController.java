@@ -3,6 +3,7 @@ package com.globalsolution.java.celticstech.controller;
 import com.globalsolution.java.celticstech.dto.request.CultivoRequestDTO;
 import com.globalsolution.java.celticstech.dto.response.CultivoResponseDTO;
 import com.globalsolution.java.celticstech.service.CultivoService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +23,7 @@ public class CultivoController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
-
+    @Operation(summary = "Cria o cultivo")
     @PostMapping()
     public ResponseEntity<CultivoResponseDTO> criarCultivo(@Valid @RequestBody CultivoRequestDTO cultivoRequest){
         return ResponseEntity
@@ -32,7 +33,7 @@ public class CultivoController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
-
+    @Operation(summary = "Lista os cultivos pelo id")
     @GetMapping("/{id}")
     public ResponseEntity<CultivoResponseDTO> listarCultivoPorId(@PathVariable Long id){
         return ResponseEntity
@@ -42,7 +43,7 @@ public class CultivoController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
-
+    @Operation(summary = "Lista todos os cultivos")
     @GetMapping()
     public ResponseEntity<Page<CultivoResponseDTO>> listarTodos(Pageable pageable){
         return ResponseEntity
@@ -52,7 +53,7 @@ public class CultivoController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
-
+    @Operation(summary = "Deleta o cultivo")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarCultivo(@PathVariable Long id){
         cultivoService.deletarCultivo(id);
@@ -63,7 +64,7 @@ public class CultivoController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
-
+    @Operation(summary = "Atualiza o Cultivo")
     @PutMapping("/{id}")
     public ResponseEntity<CultivoResponseDTO> atualizarCultivo(@PathVariable Long id, @Valid @RequestBody CultivoRequestDTO cultivoRequest){
         return ResponseEntity

@@ -2,6 +2,7 @@ package com.globalsolution.java.celticstech.controller;
 
 import com.globalsolution.java.celticstech.dto.response.AgricultorCultivoResponseDTO;
 import com.globalsolution.java.celticstech.service.AgricultorCultivoService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class AgricultorCultivoController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
-
+    @Operation(summary = "Vincula Agricultor com Cultivo")
     @PostMapping("/{idCultivo}")
     public ResponseEntity<AgricultorCultivoResponseDTO> vincularCultivo(
             @PathVariable Long idAgricultor,
@@ -34,7 +35,7 @@ public class AgricultorCultivoController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
-
+    @Operation(summary = "Deleta o vinculo entre Agricultor com Cultivo")
     @DeleteMapping("/{idCultivo}")
     public ResponseEntity<Void> deletarVinculo(
             @PathVariable Long idAgricultor,
@@ -46,7 +47,7 @@ public class AgricultorCultivoController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
-
+    @Operation(summary = "Lista todos os cultivos do agricultor")
     @GetMapping
     public ResponseEntity<Page<AgricultorCultivoResponseDTO>> listarCultivosDoAgricultor(
             @PathVariable Long idAgricultor,
