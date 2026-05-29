@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AgricultorCultivoRepository
-        extends JpaRepository<AgricultorCultivoModels, AgricultorCultivoId> {
+public interface AgricultorCultivoRepository extends JpaRepository<AgricultorCultivoModels, AgricultorCultivoId> {
     Page<AgricultorCultivoModels> findByAgricultorIdAgricultor(Long idAgricultor, Pageable pageable);
 }

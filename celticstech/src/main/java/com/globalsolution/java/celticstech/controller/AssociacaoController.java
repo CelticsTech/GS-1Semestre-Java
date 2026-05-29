@@ -21,6 +21,8 @@ public class AssociacaoController {
         this.associacaoService = associacaoService;
     }
 
+    //-------------------------------------------------------------------------------------------------------------------
+
     @Operation(summary = "Cria uma associação")
     @PostMapping()
     public ResponseEntity<AssociacaoResponseDTO> criarAssociacao(@Valid @RequestBody AssociacaoRequestDTO associacaoRequest){
@@ -28,6 +30,8 @@ public class AssociacaoController {
                 .status(HttpStatus.CREATED)
                 .body(associacaoService.criarAssociacao(associacaoRequest));
     }
+
+    //-------------------------------------------------------------------------------------------------------------------
 
     @Operation(summary = "Busca associação pelo id")
     @GetMapping("/{id}")
@@ -37,6 +41,8 @@ public class AssociacaoController {
                 .body(associacaoService.listarAssociacaoPeloId(id));
     }
 
+    //-------------------------------------------------------------------------------------------------------------------
+
     @Operation(summary = "Busca todas as associacoes cadastradas")
     @GetMapping()
     public ResponseEntity<Page<AssociacaoResponseDTO>> buscarTodasAssociacoes(Pageable pageable){
@@ -44,6 +50,8 @@ public class AssociacaoController {
                 .status(HttpStatus.OK)
                 .body(associacaoService.listarTodasAssociacoes(pageable));
     }
+
+    //-------------------------------------------------------------------------------------------------------------------
 
     @Operation(summary = "Deleta uma associação")
     @DeleteMapping("/{id}")
@@ -53,6 +61,8 @@ public class AssociacaoController {
                 .status(HttpStatus.NO_CONTENT)
                 .build();
     }
+
+    //-------------------------------------------------------------------------------------------------------------------
 
     @Operation(summary = "Atualiza uma associação")
     @PutMapping("/{id}")
