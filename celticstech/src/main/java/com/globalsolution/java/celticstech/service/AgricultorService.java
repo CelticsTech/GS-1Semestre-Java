@@ -5,6 +5,8 @@ import com.globalsolution.java.celticstech.dto.response.AgricultorResponseDTO;
 import com.globalsolution.java.celticstech.exceptions.ResourceNotFoundException;
 import com.globalsolution.java.celticstech.models.AgricultorModels;
 import com.globalsolution.java.celticstech.repository.AgricultorRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,13 @@ public class AgricultorService {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @CacheEvict(
+            value = {
+                    "agricultores",
+                    "agricultoresById"
+            },
+            allEntries = true
+    )
     public AgricultorResponseDTO criarAgricultor(AgricultorRequestDTO agricultorRequest){
         AgricultorModels agricultor = agricultorRepository.save(agricultorRequest.toEntity());
 
@@ -37,6 +46,10 @@ public class AgricultorService {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @Cacheable(
+            value = "agricultores",
+            key = "#pageable.pageNumber + '-' + #pageable.pageSize"
+    )
     public Page<AgricultorResponseDTO> listarTodosAgricultores(Pageable pageable){
         return agricultorRepository.findAll(pageable)
                 .map(AgricultorResponseDTO::fromEntity);
@@ -44,6 +57,7 @@ public class AgricultorService {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @Cacheable(value = "agricultoresById", key = "#id")
     public AgricultorResponseDTO buscarPorId(Long id){
         AgricultorModels agricultor = listarAgricultorPorId(id);
 
@@ -52,6 +66,13 @@ public class AgricultorService {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @CacheEvict(
+            value = {
+                    "agricultores",
+                    "agricultoresById"
+            },
+            allEntries = true
+    )
     public void removerAgricultor(Long id){
         AgricultorModels agricultor = listarAgricultorPorId(id);
         agricultorRepository.delete(agricultor);
@@ -59,6 +80,13 @@ public class AgricultorService {
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @CacheEvict(
+            value = {
+                    "agricultores",
+                    "agricultoresById"
+            },
+            allEntries = true
+    )
     public AgricultorResponseDTO atualizarAgricultor(Long id, AgricultorRequestDTO agricultorRequest){
         AgricultorModels agricultor = listarAgricultorPorId(id);
 

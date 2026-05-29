@@ -8,39 +8,35 @@ import com.globalsolution.java.celticstech.models.AgricultorModels;
 import com.globalsolution.java.celticstech.models.CultivoModels;
 import com.globalsolution.java.celticstech.models.id.AgricultorCultivoId;
 import com.globalsolution.java.celticstech.repository.AgricultorCultivoRepository;
-import com.globalsolution.java.celticstech.repository.AgricultorRepository;
-import com.globalsolution.java.celticstech.repository.CultivoRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AgricultorCultivoService {
 
     private AgricultorCultivoRepository agricultorCultivoRepository;
-    private AgricultorRepository agricultorRepository;
-    private CultivoRepository cultivoRepository;
     private AgricultorService agricultorService;
     private CultivoService cultivoService;
 
-    public AgricultorCultivoService(AgricultorCultivoRepository agricultorCultivoRepository,
-                                    AgricultorRepository agricultorRepository,
-                                    CultivoRepository cultivoRepository,
-                                    AgricultorService agricultorService,
-                                    CultivoService cultivoService
-                                    )
-    {
+    public AgricultorCultivoService(
+            AgricultorCultivoRepository agricultorCultivoRepository,
+            AgricultorService agricultorService,
+            CultivoService cultivoService
+    ) {
         this.agricultorCultivoRepository = agricultorCultivoRepository;
-        this.agricultorRepository = agricultorRepository;
-        this.cultivoRepository = cultivoRepository;
         this.agricultorService = agricultorService;
         this.cultivoService = cultivoService;
     }
 
     //-------------------------------------------------------------------------------------------------------------------
 
+    @Cacheable(
+            value = "cultivosDoAgricultor",
+            key = "#idAgricultor + '-' + #pageable.pageNumber + '-' + #pageable.pageSize"
+    )
     public Page<AgricultorCultivoResponseDTO> listarCultivosDoAgricultor(
             Long idAgricultor,
             Pageable pageable
@@ -54,11 +50,23 @@ public class AgricultorCultivoService {
 
     //-------------------------------------------------------------------------------------------------------------------
 
-    public AgricultorCultivoResponseDTO vincularCultivo(Long idAgricultor, Long idCultivo){
+    @CacheEvict(
+            value = "cultivosDoAgricultor",
+            allEntries = true
+    )
+    public AgricultorCultivoResponseDTO vincularCultivo(
+            Long idAgricultor,
+            Long idCultivo
+    ){
 
-        AgricultorModels agricultor = agricultorService.listarAgricultorPorId(idAgricultor);
-        CultivoModels cultivo = cultivoService.listarCultivoPorId(idCultivo);
-        AgricultorCultivoId id = new AgricultorCultivoId(idAgricultor, idCultivo);
+        AgricultorModels agricultor =
+                agricultorService.listarAgricultorPorId(idAgricultor);
+
+        CultivoModels cultivo =
+                cultivoService.listarCultivoPorId(idCultivo);
+
+        AgricultorCultivoId id =
+                new AgricultorCultivoId(idAgricultor, idCultivo);
 
         if (agricultorCultivoRepository.existsById(id)) {
             throw new BusinessException(
@@ -73,13 +81,20 @@ public class AgricultorCultivoService {
                 .build();
 
         return AgricultorCultivoResponseDTO.fromEntity(
-                agricultorCultivoRepository.save(vinculo));
-    };
+                agricultorCultivoRepository.save(vinculo)
+        );
+    }
 
     //-------------------------------------------------------------------------------------------------------------------
 
-    public void deletarVinculo(Long idCultivo, Long idAgricultor){
-        AgricultorCultivoId id = new AgricultorCultivoId(idCultivo, idAgricultor);
+    @CacheEvict(
+            value = "cultivosDoAgricultor",
+            allEntries = true
+    )
+    public void deletarVinculo(Long idAgricultor, Long idCultivo){
+
+        AgricultorCultivoId id =
+                new AgricultorCultivoId(idAgricultor, idCultivo);
 
         if (!agricultorCultivoRepository.existsById(id)) {
             throw new ResourceNotFoundException("Vínculo não encontrado");
