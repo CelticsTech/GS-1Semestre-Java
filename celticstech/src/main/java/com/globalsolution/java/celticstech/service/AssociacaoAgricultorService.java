@@ -8,6 +8,8 @@ import com.globalsolution.java.celticstech.models.AssociacaoAgricultorModels;
 import com.globalsolution.java.celticstech.models.AssociacaoModels;
 import com.globalsolution.java.celticstech.models.id.AssociacaoAgricultorId;
 import com.globalsolution.java.celticstech.repository.AssociacaoAgricultorRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,10 @@ public class AssociacaoAgricultorService {
         this.agricultorService = agricultorService;
     }
 
+    @Cacheable(
+            value = "agricultoresDaAssociacao",
+            key = "#idAssociacao + '-' + #pageable.pageNumber + '-' + #pageable.pageSize"
+    )
     public Page<AssociacaoAgricultorResponseDTO> listarAgricultoresDaAssociacao(
             Long idAssociacao,
             Pageable pageable
@@ -40,6 +46,10 @@ public class AssociacaoAgricultorService {
                 .map(AssociacaoAgricultorResponseDTO::fromEntity);
     }
 
+    @CacheEvict(
+            value = "agricultoresDaAssociacao",
+            allEntries = true
+    )
     public AssociacaoAgricultorResponseDTO vincularAgricultor(
             Long idAssociacao,
             Long idAgricultor
@@ -67,6 +77,10 @@ public class AssociacaoAgricultorService {
         );
     }
 
+    @CacheEvict(
+            value = "agricultoresDaAssociacao",
+            allEntries = true
+    )
     public void deletarVinculo(Long idAssociacao, Long idAgricultor) {
         AssociacaoAgricultorId id =
                 new AssociacaoAgricultorId(idAssociacao, idAgricultor);

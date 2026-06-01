@@ -21,7 +21,11 @@ public class CacheConfig {
                 "regioesById",
                 "associacoes",
                 "associacoesById",
-                "cultivosDoAgricultor"
+                "cultivosDoAgricultor",
+                "agricultoresDaAssociacao",
+                "contatos",
+                "contatosById"
+
         );
     }
 }
