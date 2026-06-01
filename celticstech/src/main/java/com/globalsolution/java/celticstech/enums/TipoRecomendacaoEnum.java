@@ -4,5 +4,5 @@ public enum TipoRecomendacaoEnum {
     IRRIGACAO,
     COLHEITA,
     PLANTIU,
-    NÃOIRRIGAR
+    NAOIRRIGAR
 }

@@ -40,7 +40,7 @@ public class CultivoService {
 
     public CultivoModels listarCultivoPorId(Long id){
         return cultivoRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Agricultor não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cultivo não encontrado"));
     }
 
     //-------------------------------------------------------------------------------------------------------------------

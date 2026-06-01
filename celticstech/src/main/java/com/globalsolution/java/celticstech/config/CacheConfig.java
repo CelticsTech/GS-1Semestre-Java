@@ -24,7 +24,12 @@ public class CacheConfig {
                 "cultivosDoAgricultor",
                 "agricultoresDaAssociacao",
                 "contatos",
-                "contatosById"
+                "contatosById",
+                "recomendacoes",
+                "recomendacoesById",
+                "recomendacoesByAssociacao",
+                "recomendacoesByCultivo",
+                "recomendacoesByTipo"
 
         );
     }
