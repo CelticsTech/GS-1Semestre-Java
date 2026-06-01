@@ -37,9 +37,7 @@ public class AgricultorCultivoService {
             value = "cultivosDoAgricultor",
             key = "#idAgricultor + '-' + #pageable.pageNumber + '-' + #pageable.pageSize"
     )
-    public Page<AgricultorCultivoResponseDTO> listarCultivosDoAgricultor(
-            Long idAgricultor,
-            Pageable pageable
+    public Page<AgricultorCultivoResponseDTO> listarCultivosDoAgricultor(Long idAgricultor, Pageable pageable
     ) {
         agricultorService.listarAgricultorPorId(idAgricultor);
 
@@ -54,19 +52,14 @@ public class AgricultorCultivoService {
             value = "cultivosDoAgricultor",
             allEntries = true
     )
-    public AgricultorCultivoResponseDTO vincularCultivo(
-            Long idAgricultor,
-            Long idCultivo
+    public AgricultorCultivoResponseDTO vincularCultivo(Long idAgricultor, Long idCultivo
     ){
 
-        AgricultorModels agricultor =
-                agricultorService.listarAgricultorPorId(idAgricultor);
+        AgricultorModels agricultor = agricultorService.listarAgricultorPorId(idAgricultor);
 
-        CultivoModels cultivo =
-                cultivoService.listarCultivoPorId(idCultivo);
+        CultivoModels cultivo = cultivoService.listarCultivoPorId(idCultivo);
 
-        AgricultorCultivoId id =
-                new AgricultorCultivoId(idAgricultor, idCultivo);
+        AgricultorCultivoId id = new AgricultorCultivoId(idAgricultor, idCultivo);
 
         if (agricultorCultivoRepository.existsById(id)) {
             throw new BusinessException(
@@ -93,8 +86,7 @@ public class AgricultorCultivoService {
     )
     public void deletarVinculo(Long idAgricultor, Long idCultivo){
 
-        AgricultorCultivoId id =
-                new AgricultorCultivoId(idAgricultor, idCultivo);
+        AgricultorCultivoId id = new AgricultorCultivoId(idAgricultor, idCultivo);
 
         if (!agricultorCultivoRepository.existsById(id)) {
             throw new ResourceNotFoundException("Vínculo não encontrado");

@@ -3,6 +3,7 @@ package com.globalsolution.java.celticstech.models;
 import com.globalsolution.java.celticstech.models.id.AssociacaoAgricultorId;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AssociacaoAgricultorModels {
 
     @EmbeddedId
