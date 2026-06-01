@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.hateoas.EntityModel;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 @RestController
 @RequestMapping("/cultivos")
 public class CultivoController {
@@ -33,12 +36,25 @@ public class CultivoController {
 
     //-------------------------------------------------------------------------------------------------------------------
 
-    @Operation(summary = "Lista os cultivos pelo id")
+    @Operation(summary = "Listar cultivo pelo ID com HATEOAS")
     @GetMapping("/{id}")
-    public ResponseEntity<CultivoResponseDTO> listarCultivoPorId(@PathVariable Long id){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(cultivoService.listarPorId(id));
+    public ResponseEntity<EntityModel<CultivoResponseDTO>> listarCultivoPorId(
+            @PathVariable Long id
+    ){
+        CultivoResponseDTO cultivo = cultivoService.listarPorId(id);
+
+        EntityModel<CultivoResponseDTO> model = EntityModel.of(cultivo);
+
+        model.add(linkTo(methodOn(CultivoController.class)
+                .listarCultivoPorId(id)).withSelfRel());
+
+        model.add(linkTo(methodOn(CultivoController.class)
+                .listarTodos(Pageable.unpaged())).withRel("todos-cultivos"));
+
+        model.add(linkTo(methodOn(RecomendacaoController.class)
+                .listarPorCultivo(id, Pageable.unpaged())).withRel("recomendacoes-do-cultivo"));
+
+        return ResponseEntity.ok(model);
     }
 
     //-------------------------------------------------------------------------------------------------------------------
