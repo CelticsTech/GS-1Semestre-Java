@@ -8,6 +8,7 @@ Sistema inteligente para apoio ao agronegócio com recomendações de cultivo, i
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.x-green)
 ![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-brightgreen)
 ![H2](https://img.shields.io/badge/Database-H2-blue)
+![JWT](https://img.shields.io/badge/Auth-JWT-purple)
 ![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow)
 
 </div>
@@ -18,7 +19,7 @@ Sistema inteligente para apoio ao agronegócio com recomendações de cultivo, i
 
 A **CelticsTech API** foi desenvolvida para auxiliar agricultores e associações rurais no gerenciamento de cultivos e recomendações agrícolas.
 
-A solução tem como foco o uso de tecnologia para apoiar decisões relacionadas a:
+A solução conecta tecnologia, dados e agronegócio para apoiar decisões relacionadas a:
 
 - 🌱 Plantio
 - 💧 Irrigação
@@ -42,6 +43,8 @@ Lombok
 Swagger / OpenAPI
 Spring Cache
 Bean Validation
+HATEOAS
+JWT
 ```
 
 ---
@@ -79,7 +82,7 @@ http://localhost:8080/h2-console
 ## ⚙️ Configuração
 
 ```txt
-JDBC URL: jdbc:h2:mem:testdb
+JDBC URL: jdbc:h2:mem:celticstechdb
 User: sa
 Password:
 ```
@@ -96,13 +99,42 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
+# 🔐 Autenticação
+
+A API possui autenticação com JWT utilizando o login da associação.
+
+## Login
+
+| Método | Endpoint | Descrição |
+|---|---|---|
+| POST | `/auth/login` | Realizar login |
+
+### Request
+
+```json
+{
+  "login": "arp",
+  "senha": "123456"
+}
+```
+
+### Response
+
+```json
+{
+  "token": "eyJhbGciOi..."
+}
+```
+
+---
+
 # 🌾 Endpoints - Agricultores
 
 | Método | Endpoint | Descrição |
 |---|---|---|
 | POST | `/agricultores` | Criar agricultor |
 | GET | `/agricultores` | Listar agricultores |
-| GET | `/agricultores/{id}` | Buscar agricultor por ID |
+| GET | `/agricultores/{id}` | Buscar agricultor por ID com HATEOAS |
 | PUT | `/agricultores/{id}` | Atualizar agricultor |
 | DELETE | `/agricultores/{id}` | Deletar agricultor |
 
@@ -114,7 +146,7 @@ http://localhost:8080/swagger-ui/index.html
 |---|---|---|
 | POST | `/cultivos` | Criar cultivo |
 | GET | `/cultivos` | Listar cultivos |
-| GET | `/cultivos/{id}` | Buscar cultivo por ID |
+| GET | `/cultivos/{id}` | Buscar cultivo por ID com HATEOAS |
 | PUT | `/cultivos/{id}` | Atualizar cultivo |
 | DELETE | `/cultivos/{id}` | Deletar cultivo |
 
@@ -209,18 +241,33 @@ AuditoriaModels
 ### 🔹 Relacionamentos
 
 ```txt
-Região → Associação (OneToMany)
+Região → Associação
 
-Associação → Região (ManyToOne)
+Associação → Região
 
-Associação ↔ Agricultor (ManyToMany)
+Associação ↔ Agricultor
 
-Agricultor ↔ Cultivo (Entidade Associativa)
+Agricultor ↔ Cultivo
 
-Recomendação → Associação (ManyToOne)
+Recomendação → Associação
 
-Recomendação → Cultivo (ManyToOne)
+Recomendação → Cultivo
 ```
+
+---
+
+# 🔗 HATEOAS
+
+A API utiliza HATEOAS em endpoints de busca por ID.
+
+Exemplo:
+
+```txt
+GET /agricultores/{id}
+GET /cultivos/{id}
+```
+
+Retornando links relacionados ao próprio recurso e a outras ações disponíveis.
 
 ---
 
@@ -238,19 +285,14 @@ Caches implementados:
 ```txt
 agricultores
 agricultoresById
-
 cultivos
 cultivosById
-
 regioes
 regioesById
-
 associacoes
 associacoesById
-
 contatos
 contatosById
-
 recomendacoes
 recomendacoesById
 ```
@@ -266,6 +308,7 @@ recomendacoesById
 @Email
 @Min
 @Pattern
+@CNPJ
 ```
 
 ### Validação Personalizada
@@ -307,7 +350,7 @@ GET /cultivos?page=0&size=10
 
 ---
 
-# 📌 Exemplo de Request
+# 📌 Exemplos de Request
 
 ## Criar Agricultor
 
@@ -342,6 +385,19 @@ GET /cultivos?page=0&size=10
 }
 ```
 
+## Criar Cultivo
+
+```json
+{
+  "nomeCultivo": "Milho",
+  "categoriaCultivo": "Grãos",
+  "porteCultivo": "HORTALICA",
+  "tempoColheita": "120 dias",
+  "vidaUtil": "1 ano",
+  "intermitencia": "Semanal"
+}
+```
+
 ## Criar Recomendação
 
 ```json
@@ -360,10 +416,34 @@ GET /cultivos?page=0&size=10
 
 ```bash
 git clone https://github.com/CelticsTech/GS-1Semestre-Java.git
+```
 
+```bash
 cd GS-1Semestre-Java
+```
 
+```bash
 mvn spring-boot:run
+```
+
+---
+
+# 🌐 Deploy
+
+Link do deploy:
+
+```txt
+Adicionar link aqui após publicação
+```
+
+---
+
+# 🎥 Vídeo de Apresentação
+
+Link do vídeo:
+
+```txt
+Adicionar link aqui
 ```
 
 ---
@@ -388,4 +468,4 @@ mvn spring-boot:run
 
 FIAP - Global Solution 2026
 
-</div>
+</div>****
