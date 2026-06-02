@@ -11,8 +11,8 @@
 	<groupId>com.globalsolution.java</groupId>
 	<artifactId>celticstech</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
-	<description/>
+    <name>celticstech</name>
+    <description>CelticsTech API - Global Solution Java</description>
 	<url/>
 	<licenses>
 		<license/>
