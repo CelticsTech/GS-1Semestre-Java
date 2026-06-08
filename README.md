@@ -430,11 +430,29 @@ mvn spring-boot:run
 
 # 🌐 Deploy
 
-Link do deploy:
+A aplicação encontra-se publicada na plataforma Render:
+
+### 🔗 API Online
 
 ```txt
-Adicionar link aqui após publicação
+https://gs-1semestre-java-3.onrender.com
 ```
+
+### 📚 Swagger Online
+
+```txt
+https://gs-1semestre-java-3.onrender.com/swagger-ui/index.html
+```
+
+### 🔍 OpenAPI JSON
+
+```txt
+https://gs-1semestre-java-3.onrender.com/v3/api-docs
+```
+
+> Observação: por utilizar o plano gratuito do Render, a aplicação pode levar alguns segundos para responder após períodos de inatividade.
+
+---
 
 ---
 
