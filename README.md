@@ -461,7 +461,7 @@ https://gs-1semestre-java-3.onrender.com/v3/api-docs
 Link do vídeo:
 
 ```txt
-Adicionar link aqui
+https://youtu.be/-lAxM3KzQT4
 ```
 
 ---
