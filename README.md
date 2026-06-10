@@ -458,10 +458,15 @@ https://gs-1semestre-java-3.onrender.com/v3/api-docs
 
 # 🎥 Vídeo de Apresentação
 
-Link do vídeo:
+Link do vídeo 10 minutos:
 
 ```txt
 https://youtu.be/-lAxM3KzQT4
+```
+Link do vídeo pitch:
+
+```txt
+https://youtu.be/VmLq21lsycI
 ```
 
 ---
